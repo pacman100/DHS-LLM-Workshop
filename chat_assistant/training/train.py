@@ -59,6 +59,13 @@ class ModelArguments:
             "help": "comma separated list of target modules to apply LoRA layers to"
         },
     )
+    lora_fast_train_mode: Optional[bool] = field(
+        default=False,
+        metadata={
+            "help": "If this is True, then the model will use specialized layers for faster training, especially in conjunction "
+            "with torch.compile."
+        },
+    )
     use_nested_quant: Optional[bool] = field(
         default=False,
         metadata={"help": "Activate nested quantization for 4bit base models"},
@@ -166,9 +173,13 @@ def main(model_args, data_args, training_args):
     trainer.accelerator.print(f"{trainer.model}")
     if model_args.use_peft_lora:
         trainer.model.print_trainable_parameters()
+        # if model_args.lora_fast_train_mode:
+        #     trainer.model = trainer.model.get_base_model()
+    trainer.accelerator.print(f"{trainer.accelerator.state.dynamo_plugin}")
 
     # train
     trainer.train()
+    trainer.accelerator.print(f"{trainer.model_wrapped}")
 
     # saving final model
     if trainer.is_fsdp_enabled:
