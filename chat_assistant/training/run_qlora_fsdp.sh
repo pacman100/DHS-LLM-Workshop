@@ -1,4 +1,4 @@
-accelerate launch --config_file "configs/fsdp_lora_config.yaml"  train.py \
+accelerate launch --config_file "configs/fsdp_qlora_config.yaml"  train.py \
 --seed 100 \
 --model_name "mistralai/Mistral-7B-v0.1" \
 --dataset_name "HuggingFaceH4/ultrachat_200k" \
