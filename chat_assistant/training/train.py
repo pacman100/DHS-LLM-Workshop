@@ -175,6 +175,7 @@ def main(model_args, data_args, training_args):
 
             fsdp_plugin = trainer.accelerator.state.fsdp_plugin
             fsdp_plugin.auto_wrap_policy = fsdp_auto_wrap_policy(trainer.model)
+            print(fsdp_plugin)
             # auto_wrap_policy = fsdp_auto_wrap_policy(trainer.model)
             # kwargs = {
             #     "sharding_strategy": fsdp_plugin.sharding_strategy,
