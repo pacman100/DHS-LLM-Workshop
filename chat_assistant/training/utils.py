@@ -123,7 +123,7 @@ def create_and_prepare_model(args):
         device_map=device_map,
         trust_remote_code=True,
         attn_implementation="flash_attention_2" if args.use_flash_attn else "eager",
-        torch_dtype=torch.flaot32,
+        torch_dtype=torch.float32,
     )
 
     peft_config = None
