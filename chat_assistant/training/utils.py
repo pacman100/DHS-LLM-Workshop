@@ -97,7 +97,7 @@ def create_and_prepare_model(args):
             bnb_4bit_quant_type=args.bnb_4bit_quant_type,
             bnb_4bit_compute_dtype=compute_dtype,
             bnb_4bit_use_double_quant=args.use_nested_quant,
-            bnb_4bit_quant_storage=compute_dtype,
+            bnb_4bit_quant_storage=torch.float32,
         )
 
         if compute_dtype == torch.float16 and args.use_4bit_qunatization:
